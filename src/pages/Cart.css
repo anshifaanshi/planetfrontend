@@ -1,0 +1,17 @@
+.cart-container {
+  max-width: 700px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.checkout-btn {
+  padding: 12px 40px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #0056b3;
+  box-shadow: 0 6px 20px rgba(0, 86, 179, 0.7);
+}
