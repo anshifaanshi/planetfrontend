@@ -13,7 +13,7 @@ const Cart = () => {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/getall");
+        const res = await axios.get("https://planet-coki.onrender.com/api/getall");
         setCart(res.data);
         setLoading(false);
       } catch (err) {
