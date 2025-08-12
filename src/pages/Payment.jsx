@@ -23,7 +23,7 @@ const CheckoutForm = ({ amount }) => {
     setError(null);
 
     // Call backend to create payment intent
-    const res = await fetch('http://localhost:5000/api/create-payment-intent', {
+    const res = await fetch('https://planet-coki.onrender.com/api/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ amount }),

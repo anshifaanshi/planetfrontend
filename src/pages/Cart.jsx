@@ -30,7 +30,7 @@ const Cart = () => {
 
   const handleClearCart = async () => {
     try {
-      await axios.delete("http://localhost:5000/api/clear");
+      await axios.delete("https://planet-coki.onrender.com/api/clear");
       setCart({ items: [] });
     } catch (err) {
       setError("Error clearing cart");

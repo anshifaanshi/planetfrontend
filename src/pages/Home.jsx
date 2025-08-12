@@ -12,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/products");
+        const res = await axios.get("https://planet-coki.onrender.com/api/products");
         setProducts(res.data);
       } catch (err) {
         setErrorProducts(err.message || "Error fetching products");
@@ -25,7 +25,7 @@ const Home = () => {
 
   const handleAddToCart = async (item) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/cart", {
+      const response = await axios.post("https://planet-coki.onrender.com/api/cart", {
         productId: item._id,
         quantity: 1,
       });
