@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Initialize Stripe outside of component render
 const stripePromise = loadStripe('YOUR_STRIPE_PUBLISHABLE_KEY');
@@ -15,9 +16,7 @@ const CheckoutForm = ({ amount }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!stripe || !elements) {
-      return;
-    }
+    if (!stripe || !elements) return;
 
     setProcessing(true);
     setError(null);
@@ -30,14 +29,11 @@ const CheckoutForm = ({ amount }) => {
     });
 
     const { clientSecret } = await res.json();
-
     const cardElement = elements.getElement(CardElement);
 
     // Confirm card payment with Stripe
     const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: cardElement,
-      },
+      payment_method: { card: cardElement },
     });
 
     if (stripeError) {
@@ -50,14 +46,38 @@ const CheckoutForm = ({ amount }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: 400, margin: '0 auto' }}>
-      <CardElement />
-      <button type="submit" disabled={!stripe || processing} style={{ marginTop: 20 }}>
-        {processing ? "Processing..." : `Pay ₹${amount / 100}`}
-      </button>
-      {error && <div style={{ color: 'red', marginTop: 10 }}>{error}</div>}
-      {success && <div style={{ color: 'green', marginTop: 10 }}>Payment successful!</div>}
-    </form>
+    <div className="container mt-5">
+      <div className="card shadow-sm p-4 mx-auto" style={{ maxWidth: '450px' }}>
+        <h4 className="text-center mb-4">Checkout</h4>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group mb-3 p-2 border rounded">
+            <CardElement options={{ style: { base: { fontSize: '16px' } } }} />
+          </div>
+          <button
+            type="submit"
+            className="btn btn-primary w-100"
+            disabled={!stripe || processing}
+          >
+            {processing ? (
+              <span className="spinner-border spinner-border-sm"></span>
+            ) : (
+              `Pay ₹${amount / 100}`
+            )}
+          </button>
+        </form>
+
+        {error && (
+          <div className="alert alert-danger mt-3" role="alert">
+            {error}
+          </div>
+        )}
+        {success && (
+          <div className="alert alert-success mt-3" role="alert">
+            Payment successful! 🎉
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 
