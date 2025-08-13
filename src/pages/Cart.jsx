@@ -1,6 +1,6 @@
 
     
-      import React, { useEffect, useState } from "react";
+   import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -14,7 +14,17 @@ const Cart = () => {
     const fetchCart = async () => {
       try {
         const res = await axios.get("https://planet-coki.onrender.com/api/getall");
-        setCart(res.data);
+
+        // Transform backend array into expected shape
+        const transformedCart = {
+          items: res.data.map(item => ({
+            name: item.product.name,
+            price: item.product.price,
+            quantity: item.quantity,
+          })),
+        };
+
+        setCart(transformedCart);
         setLoading(false);
       } catch (err) {
         setError("Error fetching cart data");
@@ -114,5 +124,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
-         
