@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -40,6 +41,7 @@ const Home = () => {
       className="container my-5"
       style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}
     >
+      <Header/>
       {/* Cart button */}
       <div className="d-flex justify-content-end mb-4">
         <Link to="/cart" className="btn btn-danger">

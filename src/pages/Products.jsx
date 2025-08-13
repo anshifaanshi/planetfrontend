@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Header from "../components/Header";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -35,6 +36,7 @@ const Products = () => {
       className="container my-5"
       style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}
     >
+      <Header/>
       <h1 className="fw-bold mb-5 text-center" style={{ color: "#ffc107" }}>
         Our Products
       </h1>

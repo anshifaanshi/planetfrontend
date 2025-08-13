@@ -4,6 +4,7 @@
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
+
 const Cart = () => {
   const [cart, setCart] = useState({ items: [] });
   const [loading, setLoading] = useState(true);
